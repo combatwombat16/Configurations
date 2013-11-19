@@ -1,0 +1,5 @@
+#! /bin/bash
+killall conky
+
+conky -q -c ~/.conky/.conkyrc_menu &
+conky -q -c ~/.conky/.conkyrc_system

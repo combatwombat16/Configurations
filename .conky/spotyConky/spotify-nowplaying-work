@@ -1,0 +1,39 @@
+#!/bin/bash
+# Spotify Conky Now Playing
+# by Paul Williams <paul@skenmy.com>
+if [ ! -f ~/.conky/.cache/spotify-nowplaying ]; then
+	~/.conky/spotyConky/spotify-nowplaying > ~/.conky/.cache/spotify-nowplaying
+fi
+# Is the same song playing?
+if [ "$(~/.conky/spotyConky/spotify-nowplaying)" != "$(cat ~/.conky/.cache/spotify-nowplaying)" ]; then
+	~/.conky/spotyConky/spotify-nowplaying-album
+	~/.conky/spotyConky/spotify-nowplaying > ~/.conky/.cache/spotify-nowplaying
+	~/.conky/spotyConky/spotify-nowplaying-length > ~/.conky/.cache/spotify-nowplaying-length
+	length=$(cat ~/.conky/.cache/spotify-nowplaying-length)
+	secs=$(($length/1000000))
+	printf ""%d:%02d"\n" $(($secs%3600/60)) $(($secs%60)) > ~/.conky/.cache/spotify-nowplaying-length-pretty
+	date +%s > ~/.conky/.cache/spotify-nowplaying-starttime
+	echo "0" > ~/.conky/.cache/spotify-paused
+fi
+
+# Work out time elapsed as a percentage of the total time.
+timethen=$(cat ~/.conky/.cache/spotify-nowplaying-starttime)
+timenow=$(date +%s)
+status=$(~/.conky/spotyConky/spotify-nowplaying-status)
+if [ "$status" = "Paused" ]; then
+	pt=$(cat ~/.conky/.cache/spotify-paused)
+	echo "$((pt+1))" > ~/.conky/.cache/spotify-paused
+fi
+pt=$(cat ~/.conky/.cache/spotify-paused)
+# +1 to combat slight delay
+elapsed=$((($timenow+1)-$timethen-$pt))
+printf ""%d:%02d"\n" $(($elapsed%3600/60)) $(($elapsed%60)) > ~/.conky/.cache/spotify-nowplaying-elapsed-pretty
+# Got the elapsed time, now percentage!
+totallength=$(cat ~/.conky/.cache/spotify-nowplaying-length)
+totallengthsecs=$(($totallength / 1000000))
+elapsedper="$elapsed / $totallengthsecs"
+elapsedperc=$(echo "scale=2; $elapsedper" | bc ;)
+elapsedperce="$elapsedper * 100"
+elapsedpercent=$(echo "scale=2; $elapsedperce" | bc ;)
+echo $elapsedpercent > ~/.conky/.cache/spotify-nowplaying-elapsed
+chmod 777 ~/.conky/.cache/spotify-*

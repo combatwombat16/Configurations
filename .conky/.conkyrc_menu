@@ -1,0 +1,88 @@
+# conky configuration
+#
+# The list of variables has been removed from this file in favour
+# of keeping the documentation more maintainable.
+# Check http://conky.sf.net for an up-to-date-list.
+#
+# For ideas about how to modify conky, please see:
+# http://crunchbanglinux.org/forums/topic/59/my-conky-config/
+#
+# For help with conky, please see:
+# http://crunchbanglinux.org/forums/topic/2047/conky-help/
+#
+# Enjoy! :)
+##############################################
+# Settings
+##############################################
+background yes
+use_xft yes
+xftfont Liberation Sans:size=9
+xftalpha 1
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+#own_window_argb_visual yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 200 200
+maximum_width 240
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+#default_color 656667
+default_shade_color 000000
+default_outline_color 828282
+alignment top_left
+gap_x 12
+gap_y 56
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale no
+#default_color FFFFFF
+default_color DDDDDD
+color2 AAAAAA
+color3 888888
+color4 666666
+##############################################
+#  Output
+##############################################
+TEXT
+S Y S T E M    K E Y S
+${hr}
+Alt + F2$alignr Run Dialog
+Alt + F3$alignr Alt Menu
+Super + Space$alignr Main Menu
+Super + Tab$alignr Client Menu
+Super + l$alignr Lock Screen
+Super + x$alignr Logout
+Super + F5$alignr Display Swap
+
+P R O G R A M   K E Y S
+${hr}
+Super + f$alignr File Manager
+Super + e$alignr Editor
+Super + m$alignr Media Player
+Super + w$alignr Web Browser
+Super + h$alignr Task Manager
+Super + v$alignr Volume Control
+
+U S E R   K E Y S
+${hr}
+Super + t$alignr Terminal
+Super + b$alignr VirtualBox
+Super + j$alignr Intellij
+Super + r$alignr Rstudio
+Super + i$alignr DbVisualizer
+Super + k$alignr Keepass2
+Super + s$alignr Spotify
+Super + c$alignr Vncviewer
+
+M E D I A   K E Y S
+${hr}
+Super + Alt + p$alignr Play
+Super + Alt + n$alignr Next
+Super + Alt + b$alignr Previous
